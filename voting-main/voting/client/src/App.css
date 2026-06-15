@@ -1,0 +1,140 @@
+.app {
+  min-height: 100vh;
+  background: #f5f7fb;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 28px;
+  background: #111827;
+  color: white;
+}
+
+.navbar nav {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.card {
+  background: white;
+  padding: 28px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+input {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin: 12px 0;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+}
+
+button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 10px;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+.message {
+  margin-top: 18px;
+  font-weight: 600;
+}
+
+.warning {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 14px 28px;
+  font-weight: 600;
+}
+.wallet-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.disconnect-button {
+  background: #dc2626;
+}
+
+.disconnect-button:hover {
+  background: #b91c1c;
+}
+
+.wallet-info {
+  background: #e0f2fe;
+  color: #075985;
+  padding: 12px 28px;
+  font-weight: 600;
+  word-break: break-all;
+}
+
+textarea {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin: 12px 0;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  font-family: inherit;
+}
+
+.candidate-list {
+  display: grid;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.candidate-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #f9fafb;
+  color: #111827;
+  border: 1px solid #d1d5db;
+  padding: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.candidate-card:hover {
+  background: #eff6ff;
+}
+
+.candidate-card.selected {
+  border-color: #2563eb;
+  background: #dbeafe;
+}
+
+.candidate-card small {
+  margin-top: 6px;
+  color: #6b7280;
+  word-break: break-all;
+}

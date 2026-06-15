@@ -1,0 +1,1300 @@
+{
+  "address": "2uQA8d8LujCRnCBhTVaDRipa2NshWRmyJAD6sr96knjY",
+  "metadata": {
+    "name": "vote_app",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "commit_vote",
+      "discriminator": [
+        134,
+        97,
+        90,
+        126,
+        91,
+        66,
+        16,
+        26
+      ],
+      "accounts": [
+        {
+          "name": "relayer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "election_state_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  108,
+                  101,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "commitment_record_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  109,
+                  109,
+                  105,
+                  116,
+                  109,
+                  101,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "election_state_account.poll_id",
+                "account": "ElectionState"
+              },
+              {
+                "kind": "arg",
+                "path": "nullifier"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "nullifier",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "commitment",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "finalize_poll",
+      "discriminator": [
+        90,
+        57,
+        229,
+        211,
+        20,
+        47,
+        151,
+        93
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "election_state_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  108,
+                  101,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "register_candidate",
+      "discriminator": [
+        91,
+        136,
+        96,
+        222,
+        242,
+        4,
+        160,
+        182
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "election_state_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  108,
+                  101,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "candidate_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  97,
+                  110,
+                  100,
+                  105,
+                  100,
+                  97,
+                  116,
+                  101
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "poll_id"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "candidate_marker_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  97,
+                  110,
+                  100,
+                  105,
+                  100,
+                  97,
+                  116,
+                  101,
+                  95,
+                  109,
+                  97,
+                  114,
+                  107,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "poll_id"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "voter_profile_account",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  111,
+                  116,
+                  101,
+                  114,
+                  95,
+                  112,
+                  114,
+                  111,
+                  102,
+                  105,
+                  108,
+                  101
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "poll_id"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "poll_id",
+          "type": "u64"
+        },
+        {
+          "name": "candidate_info",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "register_voter",
+      "discriminator": [
+        229,
+        124,
+        185,
+        99,
+        118,
+        51,
+        226,
+        6
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "election_state_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  108,
+                  101,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "voter_profile_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  111,
+                  116,
+                  101,
+                  114,
+                  95,
+                  112,
+                  114,
+                  111,
+                  102,
+                  105,
+                  108,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "election_state_account.poll_id",
+                "account": "ElectionState"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "candidate_marker_account",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  97,
+                  110,
+                  100,
+                  105,
+                  100,
+                  97,
+                  116,
+                  101,
+                  95,
+                  109,
+                  97,
+                  114,
+                  107,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "election_state_account.poll_id",
+                "account": "ElectionState"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "reveal_vote",
+      "discriminator": [
+        100,
+        157,
+        139,
+        17,
+        186,
+        75,
+        185,
+        149
+      ],
+      "accounts": [
+        {
+          "name": "relayer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "election_state_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  108,
+                  101,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "candidate_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  97,
+                  110,
+                  100,
+                  105,
+                  100,
+                  97,
+                  116,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "election_state_account.poll_id",
+                "account": "ElectionState"
+              },
+              {
+                "kind": "account",
+                "path": "candidate_account.candidate_wallet",
+                "account": "CandidateRegistration"
+              }
+            ]
+          }
+        },
+        {
+          "name": "commitment_record_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  109,
+                  109,
+                  105,
+                  116,
+                  109,
+                  101,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "election_state_account.poll_id",
+                "account": "ElectionState"
+              },
+              {
+                "kind": "arg",
+                "path": "nullifier"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "candidate_id",
+          "type": "u64"
+        },
+        {
+          "name": "nullifier",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "nonce",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "start_poll",
+      "discriminator": [
+        59,
+        188,
+        204,
+        28,
+        129,
+        88,
+        202,
+        242
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "election_state_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  108,
+                  101,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "candidate_registration_secs",
+          "type": "i64"
+        },
+        {
+          "name": "voting_secs",
+          "type": "i64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "CandidateMarker",
+      "discriminator": [
+        245,
+        236,
+        47,
+        124,
+        20,
+        122,
+        217,
+        47
+      ]
+    },
+    {
+      "name": "CandidateRegistration",
+      "discriminator": [
+        228,
+        148,
+        162,
+        139,
+        36,
+        45,
+        65,
+        10
+      ]
+    },
+    {
+      "name": "CommitmentRecord",
+      "discriminator": [
+        216,
+        195,
+        138,
+        99,
+        88,
+        191,
+        32,
+        246
+      ]
+    },
+    {
+      "name": "ElectionState",
+      "discriminator": [
+        216,
+        29,
+        194,
+        87,
+        179,
+        211,
+        165,
+        19
+      ]
+    },
+    {
+      "name": "VoterProfile",
+      "discriminator": [
+        217,
+        78,
+        249,
+        193,
+        223,
+        64,
+        70,
+        217
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "CandidateRegistered",
+      "discriminator": [
+        61,
+        233,
+        168,
+        175,
+        31,
+        89,
+        126,
+        159
+      ]
+    },
+    {
+      "name": "PollFinalized",
+      "discriminator": [
+        193,
+        12,
+        192,
+        22,
+        4,
+        249,
+        27,
+        252
+      ]
+    },
+    {
+      "name": "PollStarted",
+      "discriminator": [
+        44,
+        56,
+        21,
+        231,
+        116,
+        197,
+        7,
+        188
+      ]
+    },
+    {
+      "name": "VoteCommitted",
+      "discriminator": [
+        74,
+        67,
+        158,
+        48,
+        168,
+        230,
+        217,
+        77
+      ]
+    },
+    {
+      "name": "VoteRevealed",
+      "discriminator": [
+        104,
+        162,
+        140,
+        194,
+        213,
+        217,
+        117,
+        179
+      ]
+    },
+    {
+      "name": "VoterRegistered",
+      "discriminator": [
+        184,
+        179,
+        209,
+        46,
+        125,
+        60,
+        51,
+        197
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "PollNotInitialized",
+      "msg": "Poll is not initialized"
+    },
+    {
+      "code": 6001,
+      "name": "AdminOnly",
+      "msg": "Only the admin can perform this action"
+    },
+    {
+      "code": 6002,
+      "name": "PollAlreadyActive",
+      "msg": "A poll is already active"
+    },
+    {
+      "code": 6003,
+      "name": "NoActivePoll",
+      "msg": "No active poll"
+    },
+    {
+      "code": 6004,
+      "name": "CandidateRegistrationNotOpen",
+      "msg": "Candidate registration is not open"
+    },
+    {
+      "code": 6005,
+      "name": "VotingNotOpen",
+      "msg": "Voting is not open"
+    },
+    {
+      "code": 6006,
+      "name": "PollStillActive",
+      "msg": "Poll has not ended yet"
+    },
+    {
+      "code": 6007,
+      "name": "PollAlreadyFinalized",
+      "msg": "Poll already finalized"
+    },
+    {
+      "code": 6008,
+      "name": "NoVotesCast",
+      "msg": "No votes have been cast"
+    },
+    {
+      "code": 6009,
+      "name": "InvalidDuration",
+      "msg": "Invalid duration"
+    },
+    {
+      "code": 6010,
+      "name": "InvalidCandidate",
+      "msg": "Invalid candidate"
+    },
+    {
+      "code": 6011,
+      "name": "UnauthorizedAccess",
+      "msg": "Unauthorized"
+    },
+    {
+      "code": 6012,
+      "name": "VoterAlreadyRegistered",
+      "msg": "This wallet is already registered as a voter"
+    },
+    {
+      "code": 6013,
+      "name": "NullifierAlreadyUsed",
+      "msg": "This voting credential has already been used"
+    },
+    {
+      "code": 6014,
+      "name": "VoteAlreadyRevealed",
+      "msg": "This vote has already been revealed"
+    },
+    {
+      "code": 6015,
+      "name": "InvalidReveal",
+      "msg": "Reveal does not match stored commitment"
+    },
+    {
+      "code": 6016,
+      "name": "CandidateVotesOverflow",
+      "msg": "Vote count overflow"
+    },
+    {
+      "code": 6017,
+      "name": "VoterCannotBeCandidate",
+      "msg": "A voter cannot register as a candidate"
+    },
+    {
+      "code": 6018,
+      "name": "CandidateCannotBeVoter",
+      "msg": "A candidate cannot register as a voter"
+    },
+    {
+      "code": 6019,
+      "name": "VoterRegistrationClosed",
+      "msg": "Voter registration is closed"
+    },
+    {
+      "code": 6020,
+      "name": "MissingCandidateAccounts",
+      "msg": "Missing candidate accounts"
+    }
+  ],
+  "types": [
+    {
+      "name": "CandidateMarker",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "poll_id",
+            "type": "u64"
+          },
+          {
+            "name": "wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CandidateRegistered",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "poll_id",
+            "type": "u64"
+          },
+          {
+            "name": "candidate_id",
+            "type": "u64"
+          },
+          {
+            "name": "candidate_wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "candidate_info",
+            "type": "string"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CandidateRegistration",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "poll_id",
+            "type": "u64"
+          },
+          {
+            "name": "candidate_id",
+            "type": "u64"
+          },
+          {
+            "name": "candidate_wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "vote_count",
+            "type": "u64"
+          },
+          {
+            "name": "candidate_info",
+            "type": "string"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CommitmentRecord",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "poll_id",
+            "type": "u64"
+          },
+          {
+            "name": "nullifier",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "commitment",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "revealed",
+            "type": "bool"
+          },
+          {
+            "name": "candidate_id",
+            "type": "u64"
+          },
+          {
+            "name": "committed_at",
+            "type": "i64"
+          },
+          {
+            "name": "revealed_at",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ElectionState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "admin",
+            "type": "pubkey"
+          },
+          {
+            "name": "poll_id",
+            "type": "u64"
+          },
+          {
+            "name": "is_active",
+            "type": "bool"
+          },
+          {
+            "name": "is_finalized",
+            "type": "bool"
+          },
+          {
+            "name": "candidate_registration_start",
+            "type": "i64"
+          },
+          {
+            "name": "candidate_registration_end",
+            "type": "i64"
+          },
+          {
+            "name": "voting_start",
+            "type": "i64"
+          },
+          {
+            "name": "voting_end",
+            "type": "i64"
+          },
+          {
+            "name": "total_candidates",
+            "type": "u64"
+          },
+          {
+            "name": "total_registered_voters",
+            "type": "u64"
+          },
+          {
+            "name": "total_committed_votes",
+            "type": "u64"
+          },
+          {
+            "name": "total_votes_cast",
+            "type": "u64"
+          },
+          {
+            "name": "winning_candidate_id",
+            "type": "u64"
+          },
+          {
+            "name": "winning_candidate_wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "winning_candidate_info",
+            "type": "string"
+          },
+          {
+            "name": "winning_votes",
+            "type": "u64"
+          },
+          {
+            "name": "is_tie",
+            "type": "bool"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PollFinalized",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "poll_id",
+            "type": "u64"
+          },
+          {
+            "name": "winner_candidate_id",
+            "type": "u64"
+          },
+          {
+            "name": "winner_wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "winner_info",
+            "type": "string"
+          },
+          {
+            "name": "winning_votes",
+            "type": "u64"
+          },
+          {
+            "name": "is_tie",
+            "type": "bool"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PollStarted",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "poll_id",
+            "type": "u64"
+          },
+          {
+            "name": "admin",
+            "type": "pubkey"
+          },
+          {
+            "name": "candidate_registration_start",
+            "type": "i64"
+          },
+          {
+            "name": "candidate_registration_end",
+            "type": "i64"
+          },
+          {
+            "name": "voting_start",
+            "type": "i64"
+          },
+          {
+            "name": "voting_end",
+            "type": "i64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VoteCommitted",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "poll_id",
+            "type": "u64"
+          },
+          {
+            "name": "nullifier",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "commitment",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "total_committed_votes",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VoteRevealed",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "poll_id",
+            "type": "u64"
+          },
+          {
+            "name": "nullifier",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "candidate_id",
+            "type": "u64"
+          },
+          {
+            "name": "candidate_total_votes",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VoterProfile",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "is_registered",
+            "type": "bool"
+          },
+          {
+            "name": "registered_at",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VoterRegistered",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "total_registered_voters",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    }
+  ]
+}
